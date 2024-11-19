@@ -29,6 +29,7 @@ Note:
 You will probably want to use stringr
 
 ```{R}
+library(stringr)
 name_in="Sheets, Dave"
 
 reorder_name<-function(x){
@@ -90,7 +91,16 @@ relu(2)
 
 4.) Write a function that takes in a value x and returns the first power of two
 greater than x  (use a While loop)
-
+```{r}
+power_of_two <- function(x) {
+  result <- 1
+  while(result <= x) {
+    result <- result * 2
+  }
+  return(result)
+}
+power_of_two(3)
+```
 
 5) Two Sum - Write a function named two_sum()
 
@@ -100,28 +110,6 @@ You may assume that each input would have exactly one solution, and you may not 
 
 You can return the answer in any order.
 
-Example 1:
-
-Input: nums = [2,7,11,15], target = 9
-Output: [0,1]
-Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
-Example 2:
-
-Input: nums = [3,2,4], target = 6
-Output: [1,2]
-Example 3:
-
-Input: nums = [3,3], target = 6
-Output: [0,1]
-
-Constraints:
-
-2 <= nums.length <= 104
-–109 <= nums[i] <= 109
-–109 <= target <= 109
-Only one valid answer exists.
- 
-
 *Note: For the first problem I want you to use a brute force approach (loop inside a loop)* 
 
 *The brute force approach is simple. Loop through each element x and find if there is another value that equals to target – x*
@@ -130,12 +118,16 @@ Only one valid answer exists.
 
 ```{r}
 two_sum <- function(nums_vector,target){
-  #your code here
- 
+  n <- length(nums_vector)
+  for(i in 1:(n-1)) {
+    for(j in (i+1):n) {
+      if(nums_vector[i] + nums_vector[j] == target) {
+        return(c(i, j))
+      }
+    }
+  }
+  return(NULL) 
 }
-
-
-
 
 # Test code
 nums_vector <- c(5,7,12,34,6,10,8,9)
@@ -169,6 +161,15 @@ use the same regex search pattern from each
 a="Please call me at 456-123-2329, asap"
 b="Hey, we have a code 234 on machine a-234-12, call me at 678-321-98766"
 c="On 12-23-2022, Joe over at 122 Turnpike, dialled 912-835-4756, tell me by 9:02 pm Wed"
+
+extract_phone <- function(text) {
+ phone_number <- str_extract(text, "\\d{3}-\\d{3}-\\d{4}")
+ return(phone_number)
+}
+
+extract_phone(a)
+extract_phone(b)
+extract_phone(c)
 ```
 
 7.)  For lines below,  extract the domains (ie the part of the address after @)
@@ -177,6 +178,12 @@ c="On 12-23-2022, Joe over at 122 Turnpike, dialled 912-835-4756, tell me by 9:0
 d="jimmy.halibut@gmail.com"
 e="His address is:  c.brown@hopeles.org, do write him"
 f="h.potter@hogwarts.edu is bouncing back on me, I wonder why?"
+
+emails <- c(d, e, f)
+
+# Extract domains using regular expression
+domains <- sub(".*@", "", emails)
+domains
 
 ```
 

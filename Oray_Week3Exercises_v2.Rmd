@@ -69,6 +69,24 @@ powers_df(x)
     y=0.5x if x>=0
     
     This is a variant on a relu function as used in some neural networks.
+    
+```{r}
+
+relu <-function(x)
+{
+  if(x<0)
+  {
+   return(y=0.5*x)
+  }
+  if(x>=0)
+  {
+     return(y=0.3*x)
+  }
+  return(y)
+}
+
+relu(2)
+```
 
 4.) Write a function that takes in a value x and returns the first power of two
 greater than x  (use a While loop)
